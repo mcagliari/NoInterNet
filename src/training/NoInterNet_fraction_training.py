@@ -1,5 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
+import os
 
 import NoInterNet_model as NIN
 import NoInterNet_fraction_model as NINf
@@ -11,6 +12,7 @@ from torch.utils.data import DataLoader
 from torch import nn
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+#print(device)
     
 def main(ns):
     #preparing data
@@ -20,7 +22,11 @@ def main(ns):
     Pks, labels, lenk = NINf.load_Pkf(ns.input, ns.fraction_path, ns.k_max, ns.k_min, ns.log, ns.multipole, ns.norm_fs, ns.norm_c, ns.correct_Q, ns.P2_only)
 
     if ns.PCA:
+        #Here we'll also have the if for regression over the 
+        #correction of pca components or the Pk
         from sklearn.decomposition import TruncatedSVD
+        #for now I compress the (P0,P2) vector when I have the quadrupole
+        #This may be an issue when I fit the correction to the compression only for monopole
         n_components = 14 if ns.multipole == 2 else 9
         pca = TruncatedSVD(n_components=n_components)
         pca.fit(Pks)
@@ -120,6 +126,9 @@ def main(ns):
         
     optimizer = torch.optim.Adam(model.parameters(), lr=ns.learning_rate)
     
+    if not os.path.exists(ns.output):
+        os.makedirs(ns.output)
+
     #training
     if ns.moments:
         train_history, val_history = NINf.training_inference(train_dataloader, val_dataloader, model, optimizer, ns.epochs, ns.patience, ns.output, lenk, ns.neurons)

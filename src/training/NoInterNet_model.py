@@ -2,6 +2,7 @@ import numpy as np
 
 import torch
 from torch.utils.data import Dataset
+#from torchvision.transforms import ToTensor
 
 from torch import nn
 
@@ -30,6 +31,7 @@ def load_Pk(file_name, k_max=0.8, log=True, multipole=0):
     import pandas as pd
 
     Pk_paths = pd.read_csv(file_name)
+    #Pk_paths = Pk_paths.reset_index() #not sure if it is necessary
 
     Pks_int = []
     labels = []
@@ -162,7 +164,7 @@ class NoInterNet_fraction_compress_knowf(nn.Module):
         super().__init__()
                 
         self.input_size  = input_size + 1
-        self.output_size = input_size if output_size is None else output_size
+        self.output_size = input_size if output_size is None else output_size #not sure of the else outcome
         modules = [nn.Linear(self.input_size, n_in),
                    nn.LeakyReLU()] #input
          
@@ -189,6 +191,7 @@ class NoInterNet_fraction_compress_knowf(nn.Module):
         self.linear_relu_stack = nn.Sequential(*modules)
         
     def forward(self, x):
+        #x = self.flatten(x)
         out = self.linear_relu_stack(x)
         return out
     
