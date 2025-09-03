@@ -1,8 +1,8 @@
 # No-Interloper Network - NoInterNet - Line Intensity Mapping
 
-[![arXiv](https://img.shields.io/badge/arXiv-newnumber-b31b1b.svg)](new link)
+[![arXiv](https://img.shields.io/badge/arXiv-2509.02414-b31b1b.svg)](http://arxiv.org/abs/2509.02414)
 
-This code was used for the analysis presented in [Cagliari et al. (2025)](new link), which explores the correction of line interloper contamination in line intensity mapping surveys using machine learning. We develop a neural network to separate target, interloper, and continuum power spectra incorporating two wastrophysical uncertainties. We find accurate recovery of the target ($≤3\%$) and continuum spectra, though interlopers remain challenging.
+This code was used for the analysis presented in [Cagliari et al. (2025)](http://arxiv.org/abs/2509.02414), which explores the correction of line interloper contamination in line intensity mapping surveys using machine learning. We develop a neural network to separate target, interloper, and continuum power spectra incorporating two wastrophysical uncertainties. We find accurate recovery of the target ($≤3\%$) and continuum spectra, though interlopers remain challenging.
 
 # Data
 
@@ -35,4 +35,4 @@ The datasets for this project were produced with computing and storage resources
 
 # Citation
 
-If you use this code and trained networks, please link this repository and cite [Cagliari et al. (2025)](new link). 
+If you use this code and trained networks, please link this repository and cite [Cagliari et al. (2025)](http://arxiv.org/abs/2509.02414). 
